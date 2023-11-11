@@ -8,7 +8,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+<<<<<<< HEAD
 import 'package:toonflix/main.dart';
+=======
+>>>>>>> f9e6541 (currency display)
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
