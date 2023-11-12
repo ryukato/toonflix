@@ -4,136 +4,219 @@ void main() {
   runApp(const App());
 }
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({super.key});
 
   @override
+  State<App> createState() => _AppState();
+}
+
+class MyTitleWidget extends StatefulWidget {
+  const MyTitleWidget({super.key});
+
+  @override
+  State<MyTitleWidget> createState() => _MyTitleWidgetState();
+}
+
+class _MyTitleWidgetState extends State<MyTitleWidget> {
+  @override
+  void initState() {
+    super.initState();
+    debugPrint("init myTitileWidget");
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    debugPrint("dispose myTitileWidget");
+  }
+
+  @override
   Widget build(BuildContext context) {
-    const nameText = Text(
-      'Hey Yoonyoul',
+    return Text(
+      'My Large Title',
       style: TextStyle(
-          color: Colors.white, fontSize: 34, fontWeight: FontWeight.w800),
-    );
-    const greetText = Text(
-      'Welcome back',
-      style: TextStyle(color: Colors.white, fontSize: 18),
-    );
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: const Color(0xFF181818),
-        body: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 40,
-            ),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 80,
-                ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        nameText,
-                        greetText,
-                      ],
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 100,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  // crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    const Text(
-                      'Wallet',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 36,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    Text(
-                      'View All',
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.8),
-                        fontSize: 18,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                    clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF1F2123),
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(30),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Euro',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                children: [
-                                  const Text(
-                                    '6.428',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    'EUR',
-                                    style: TextStyle(
-                                      color: Colors.white.withOpacity(0.8),
-                                      fontSize: 20,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                          Transform.scale(
-                            scale: 2.2,
-                            child: Transform.translate(
-                              offset: const Offset(0, 12),
-                              child: const Icon(
-                                Icons.euro_rounded,
-                                color: Colors.white,
-                                size: 88,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ))
-              ],
-            )),
-      ),
+          fontSize: 30, color: Theme.of(context).textTheme.titleLarge!.color),
     );
   }
 }
+
+class _AppState extends State<App> {
+  bool showTitle = true;
+  void toggleTitle() {
+    setState(() {
+      showTitle = !showTitle;
+    });
+  }
+
+  int _count = 0;
+  List<int> numbers = [];
+  void onClicked() {
+    setState(() {
+      _count += 1;
+      numbers.add(_count);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        textTheme: const TextTheme(
+            titleLarge: TextStyle(
+          color: Colors.red,
+        )),
+      ),
+      home: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              showTitle ? const MyTitleWidget() : const Text('nothing'),
+              IconButton(
+                onPressed: toggleTitle,
+                icon: const Icon(Icons.remove_red_eye),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return MaterialApp(
+  //     home: Scaffold(
+  //       body: Center(
+  //         child: Column(
+  //           mainAxisAlignment: MainAxisAlignment.center,
+  //           children: [
+  //             const Text('Count'),
+  //             for (var n in numbers) Text('$n'),
+  //             IconButton(
+  //               onPressed: onClicked,
+  //               icon: const Icon(Icons.add_box_rounded),
+  //             )
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+}
+
+// class _AppState extends State<App> {
+//   @override
+//   Widget build(BuildContext context) {
+//     const nameText = Text(
+//       'Hey Yoonyoul',
+//       style: TextStyle(
+//           color: Colors.white, fontSize: 34, fontWeight: FontWeight.w800),
+//     );
+//     const greetText = Text(
+//       'Welcome back',
+//       style: TextStyle(color: Colors.white, fontSize: 18),
+//     );
+//     return MaterialApp(
+//       home: Scaffold(
+//         backgroundColor: const Color(0xFF181818),
+//         body: SingleChildScrollView(
+//           child: Padding(
+//               padding: const EdgeInsets.symmetric(
+//                 horizontal: 40,
+//               ),
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   const SizedBox(
+//                     height: 80,
+//                   ),
+//                   const Row(
+//                     mainAxisAlignment: MainAxisAlignment.end,
+//                     children: [
+//                       Column(
+//                         crossAxisAlignment: CrossAxisAlignment.end,
+//                         children: [
+//                           nameText,
+//                           greetText,
+//                         ],
+//                       )
+//                     ],
+//                   ),
+//                   const SizedBox(
+//                     height: 70,
+//                   ),
+//                   Text(
+//                     'Total Balance',
+//                     style: TextStyle(
+//                       fontSize: 27,
+//                       color: Colors.white.withOpacity(0.8),
+//                     ),
+//                   ),
+//                   const SizedBox(
+//                     height: 10,
+//                   ),
+//                   Text(
+//                     '\$5 194 482',
+//                     style: TextStyle(
+//                       fontSize: 44,
+//                       fontWeight: FontWeight.w600,
+//                       color: Colors.white.withOpacity(0.8),
+//                     ),
+//                   ),
+//                   const SizedBox(
+//                     height: 20,
+//                   ),
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                     crossAxisAlignment: CrossAxisAlignment.end,
+//                     children: [
+//                       const Text(
+//                         'Wallet',
+//                         style: TextStyle(
+//                           color: Colors.white,
+//                           fontSize: 36,
+//                           fontWeight: FontWeight.w600,
+//                         ),
+//                       ),
+//                       Text(
+//                         'View All',
+//                         style: TextStyle(
+//                           color: Colors.white.withOpacity(0.8),
+//                           fontSize: 18,
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                   const SizedBox(
+//                     height: 20,
+//                   ),
+//                   const CurrencyCard(
+//                     name: 'Euro',
+//                     code: 'EUR',
+//                     amount: '6.248',
+//                     icon: Icons.euro_rounded,
+//                     order: 1,
+//                   ),
+//                   const CurrencyCard(
+//                     name: 'Bitcoin',
+//                     code: 'BTC',
+//                     amount: '6.248',
+//                     icon: Icons.currency_bitcoin_rounded,
+//                     order: 2,
+//                   ),
+//                   const CurrencyCard(
+//                     name: 'Dollar',
+//                     code: 'USD',
+//                     amount: '6.248',
+//                     icon: Icons.attach_money_outlined,
+//                     order: 3,
+//                   ),
+//                 ],
+//               )),
+//         ),
+//       ),
+//     );
+//   }
+// }
