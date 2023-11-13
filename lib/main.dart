@@ -1,110 +1,134 @@
 import 'package:flutter/material.dart';
+import 'package:toonflix/screens/home_screen.dart';
 
 void main() {
   runApp(const App());
 }
 
-class App extends StatefulWidget {
+class App extends StatelessWidget {
   const App({super.key});
-
-  @override
-  State<App> createState() => _AppState();
-}
-
-class MyTitleWidget extends StatefulWidget {
-  const MyTitleWidget({super.key});
-
-  @override
-  State<MyTitleWidget> createState() => _MyTitleWidgetState();
-}
-
-class _MyTitleWidgetState extends State<MyTitleWidget> {
-  @override
-  void initState() {
-    super.initState();
-    debugPrint("init myTitileWidget");
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    debugPrint("dispose myTitileWidget");
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      'My Large Title',
-      style: TextStyle(
-          fontSize: 30, color: Theme.of(context).textTheme.titleLarge!.color),
-    );
-  }
-}
-
-class _AppState extends State<App> {
-  bool showTitle = true;
-  void toggleTitle() {
-    setState(() {
-      showTitle = !showTitle;
-    });
-  }
-
-  int _count = 0;
-  List<int> numbers = [];
-  void onClicked() {
-    setState(() {
-      _count += 1;
-      numbers.add(_count);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        textTheme: const TextTheme(
-            titleLarge: TextStyle(
-          color: Colors.red,
-        )),
-      ),
-      home: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              showTitle ? const MyTitleWidget() : const Text('nothing'),
-              IconButton(
-                onPressed: toggleTitle,
-                icon: const Icon(Icons.remove_red_eye),
-              )
-            ],
+          colorScheme: const ColorScheme(
+            primary: Color(0xFFE7626C),
+            onPrimary: Color(0xFFE7626C),
+            secondary: Color(0xFFE7626C),
+            onSecondary: Color(0xFFE7626C),
+            error: Color(0xFFE7626C),
+            onError: Color(0xFFE7626C),
+            background: Color(0xFFE7626C),
+            onBackground: Color(0xFFE7626C),
+            brightness: Brightness.light,
+            surface: Color(0xFFE7626C),
+            onSurface: Color(0xFFE7626C),
           ),
-        ),
-      ),
+          textTheme: const TextTheme(
+              displayLarge: TextStyle(color: Color(0xFF232B55))),
+          cardColor: const Color(0xFFF4EDDB)),
+      home: const HomeScreen(),
     );
   }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return MaterialApp(
-  //     home: Scaffold(
-  //       body: Center(
-  //         child: Column(
-  //           mainAxisAlignment: MainAxisAlignment.center,
-  //           children: [
-  //             const Text('Count'),
-  //             for (var n in numbers) Text('$n'),
-  //             IconButton(
-  //               onPressed: onClicked,
-  //               icon: const Icon(Icons.add_box_rounded),
-  //             )
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 }
+
+
+
+// class MyTitleWidget extends StatefulWidget {
+//   const MyTitleWidget({super.key});
+
+//   @override
+//   State<MyTitleWidget> createState() => _MyTitleWidgetState();
+// }
+
+// class _MyTitleWidgetState extends State<MyTitleWidget> {
+//   @override
+//   void initState() {
+//     super.initState();
+//     debugPrint("init myTitileWidget");
+//   }
+
+//   @override
+//   void dispose() {
+//     super.dispose();
+//     debugPrint("dispose myTitileWidget");
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Text(
+//       'My Large Title',
+//       style: TextStyle(
+//           fontSize: 30, color: Theme.of(context).textTheme.titleLarge!.color),
+//     );
+//   }
+// }
+
+// class _AppState extends State<App> {
+//   bool showTitle = true;
+//   void toggleTitle() {
+//     setState(() {
+//       showTitle = !showTitle;
+//     });
+//   }
+
+//   int _count = 0;
+//   List<int> numbers = [];
+//   void onClicked() {
+//     setState(() {
+//       _count += 1;
+//       numbers.add(_count);
+//     });
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       theme: ThemeData(
+//         textTheme: const TextTheme(
+//             titleLarge: TextStyle(
+//           color: Colors.red,
+//         )),
+//       ),
+//       home: Scaffold(
+//         body: Center(
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               showTitle ? const MyTitleWidget() : const Text('nothing'),
+//               IconButton(
+//                 onPressed: toggleTitle,
+//                 icon: const Icon(Icons.remove_red_eye),
+//               )
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+
+//   // @override
+//   // Widget build(BuildContext context) {
+//   //   return MaterialApp(
+//   //     home: Scaffold(
+//   //       body: Center(
+//   //         child: Column(
+//   //           mainAxisAlignment: MainAxisAlignment.center,
+//   //           children: [
+//   //             const Text('Count'),
+//   //             for (var n in numbers) Text('$n'),
+//   //             IconButton(
+//   //               onPressed: onClicked,
+//   //               icon: const Icon(Icons.add_box_rounded),
+//   //             )
+//   //           ],
+//   //         ),
+//   //       ),
+//   //     ),
+//   //   );
+//   // }
+// }
 
 // class _AppState extends State<App> {
 //   @override
