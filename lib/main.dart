@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:toonflix/screens/home_screen.dart';
+import 'package:toonflix/services/api_service.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: '.env');
+  final baseUrl = dotenv.env['API_BASE_URL'] ?? '';
+  final webtoons = await ApiService(baseUrl: baseUrl).getTodaysToons();
+  debugPrint(webtoons.map((e) => 'title: ${e.title}').join('\n'));
+
   runApp(const App());
 }
 
@@ -10,28 +17,39 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-          colorScheme: const ColorScheme(
-            primary: Color(0xFFE7626C),
-            onPrimary: Color(0xFFE7626C),
-            secondary: Color(0xFFE7626C),
-            onSecondary: Color(0xFFE7626C),
-            error: Color(0xFFE7626C),
-            onError: Color(0xFFE7626C),
-            background: Color(0xFFE7626C),
-            onBackground: Color(0xFFE7626C),
-            brightness: Brightness.light,
-            surface: Color(0xFFE7626C),
-            onSurface: Color(0xFFE7626C),
-          ),
-          textTheme: const TextTheme(
-              displayLarge: TextStyle(color: Color(0xFF232B55))),
-          cardColor: const Color(0xFFF4EDDB)),
-      home: const HomeScreen(),
+    return const MaterialApp(
+      home: HomeScreen(),
     );
   }
 }
+
+// class App extends StatelessWidget {
+//   const App({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       theme: ThemeData(
+//           colorScheme: const ColorScheme(
+//             primary: Color(0xFFE7626C),
+//             onPrimary: Color(0xFFE7626C),
+//             secondary: Color(0xFFE7626C),
+//             onSecondary: Color(0xFFE7626C),
+//             error: Color(0xFFE7626C),
+//             onError: Color(0xFFE7626C),
+//             background: Color(0xFFE7626C),
+//             onBackground: Color(0xFFE7626C),
+//             brightness: Brightness.light,
+//             surface: Color(0xFFE7626C),
+//             onSurface: Color(0xFFE7626C),
+//           ),
+//           textTheme: const TextTheme(
+//               displayLarge: TextStyle(color: Color(0xFF232B55))),
+//           cardColor: const Color(0xFFF4EDDB)),
+//       home: const HomeScreen(),
+//     );
+//   }
+// }
 
 
 
