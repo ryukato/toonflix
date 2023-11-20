@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:toonflix/screens/home_screen.dart';
-import 'package:toonflix/services/api_service.dart';
 
 void main() async {
-  await dotenv.load(fileName: '.env');
-  final baseUrl = dotenv.env['API_BASE_URL'] ?? '';
-  final webtoons = await ApiService(baseUrl: baseUrl).getTodaysToons();
-  debugPrint(webtoons.map((e) => 'title: ${e.title}').join('\n'));
-
   runApp(const App());
 }
 
@@ -17,7 +10,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: HomeScreen(),
     );
   }
